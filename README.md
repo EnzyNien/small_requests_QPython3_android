@@ -1,3 +1,10 @@
+
+#Small changes in urequests to work with QPython 3 on android.
+#Is a weak alternative to "requests"
+
+
+
+
 # wipy-urllib
 
 This version of urllib is designed to be used with Micropython.
