@@ -41,19 +41,19 @@ class URLOpener:
         if cookies:
             for k, v in cookies.items():
                 header_string += 'Cookie: %s=%s\r\n' % (k, quote_plus(v))
-        request = b'%s %s HTTP/1.0\r\n%s' % (method, path, header_string)
+        request = '%s %s HTTP/1.0\r\n%s' % (method, path, header_string).encode("utf-8")
         if data:
             if isinstance(data, dict):
                 enc_data = urlencode(data)
                 if not headers.get('Content-Type'):
-                    request += 'Content-Type: application/x-www-form-urlencoded\r\n'
-                request += 'Content-Length: %s\r\n\r\n%s\r\n' % (len(enc_data), enc_data)
+                    request += 'Content-Type: application/x-www-form-urlencoded\r\n'.encode("utf-8")
+                request += 'Content-Length: %s\r\n\r\n%s\r\n' % (len(enc_data), enc_data).encode("utf-8")
             else:
-                request += 'Content-Length: %s\r\n\r\n%s\r\n' % (len(data), data)
-        request += '\r\n'
+                request += 'Content-Length: %s\r\n\r\n%s\r\n' % (len(data), data).encode("utf-8")
+        request += '\r\n'.encode("utf-8")
         s.send(request)
         while 1:
-            recv = s.recv(1024)
+            recv = s.recv(4096)
             if len(recv) == 0: break
             self.text += recv.decode()
         s.close()
