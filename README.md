@@ -1,8 +1,8 @@
 
-# Small changes in urequests to work with QPython3 on android.
-# Is a weak alternative to "requests"
+### Small changes in urequests to work with QPython3 on android.
+### Is a weak alternative to "requests"
 
-# urequests
+### urequests
 
 First version of urequests for QPython3
 
