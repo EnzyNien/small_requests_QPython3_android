@@ -1,12 +1,14 @@
 
-Small changes in urequests to work with QPython3 on android.
-Is a weak alternative to "requests"
+# Small changes in urequests to work with QPython3 on android.
+# Is a weak alternative to "requests"
 
 # urequests
 
-First version of urequests for micropython
+First version of urequests for QPython3
 
-Supports:
+Only the query on CTTP is available
+On completion:
+
  - SSL
  - Cookies
  - Basic Auth
