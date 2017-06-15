@@ -1,8 +1,10 @@
 """Open an arbitrary URL.
 
-Adapted for Micropython by Alex Cowan <acowan@gmail.com>
+Adapted for QPython3 by EnzyNien <acowan@gmail.com>
 
 Works in a similar way to python-requests http://docs.python-requests.org/en/latest/
+
+
 """
 
 import socket
@@ -41,21 +43,24 @@ class URLOpener:
         if cookies:
             for k, v in cookies.items():
                 header_string += 'Cookie: %s=%s\r\n' % (k, quote_plus(v))
-        request = '%s %s HTTP/1.0\r\n%s' % (method, path, header_string).encode("utf-8")
+        request = "{0} {1} HTTP/1.0\r\n{2}".format(method, path, header_string)
         if data:
             if isinstance(data, dict):
                 enc_data = urlencode(data)
                 if not headers.get('Content-Type'):
-                    request += 'Content-Type: application/x-www-form-urlencoded\r\n'.encode("utf-8")
-                request += 'Content-Length: %s\r\n\r\n%s\r\n' % (len(enc_data), enc_data).encode("utf-8")
+                    request += 'Content-Type: application/x-www-form-urlencoded\r\n'
+                request += 'Content-Length: %s\r\n\r\n%s\r\n' % (len(enc_data), enc_data)
             else:
-                request += 'Content-Length: %s\r\n\r\n%s\r\n' % (len(data), data).encode("utf-8")
-        request += '\r\n'.encode("utf-8")
-        s.send(request)
+                request += 'Content-Length: %s\r\n\r\n%s\r\n' % (len(data), data)
+        request += '\r\n'
+        s.send(bytes(request, "utf-8"))
+        response = b""
         while 1:
-            recv = s.recv(4096)
-            if len(recv) == 0: break
-            self.text += recv.decode()
+            recv = s.recv(512)
+            if len(recv) == 0: 
+             break   
+            response += recv
+        self.text = response.decode("utf-8")
         s.close()
         self._parse_result()
 
