@@ -6,7 +6,7 @@
 
 First version of urequests for QPython3
 
-Only the query on CTTP is available
+Only HTTP request is available
 On completion:
 
  - SSL
