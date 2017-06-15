@@ -1,6 +1,6 @@
 """Open an arbitrary URL.
 
-Adapted for QPython3 by EnzyNien
+Adapted for QPython3 by EnzyNien <enzynein@gmail.com>
 
 Works in a similar way to python-requests http://docs.python-requests.org/en/latest/
 
